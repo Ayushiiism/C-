@@ -1,0 +1,13 @@
+#include <bits/stdc++.h> 
+int maximumProfit(vector<int> &prices){
+    int x=prices[0];
+    int n=prices.size();
+    int ans=INT_MIN;
+    for(auto i=0;i<n;++i){
+        if(prices[i]<x){
+            x=prices[i];
+        }else{
+            ans=max(ans,prices[i]-x);
+        }
+    }return ans;
+}
