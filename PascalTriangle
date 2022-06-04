@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+#define ll long long int
+vector<vector<long long int>> printPascal(int n) 
+{
+    vector<vector<ll>>v;
+        for(auto i=0;i<n;++i){
+            vector<ll>k(i+1,1);
+            v.push_back(k);
+        }
+        for(auto i=2;i<n;++i){
+            for(auto j=1;j<v[i].size()-1;++j){
+                v[i][j]=v[i-1][j-1]+v[i-1][j];
+            }
+        }
+        return v;
+}
