@@ -1,0 +1,57 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+#include<bits/stdc++.h>
+ TreeNode<int>* solve(vector < int > & preorder, int preStart, int preEnd, vector 
+ < int > & inorder, int inStart, int inEnd, map < int, int > & mp) 
+    {
+        if (preStart > preEnd || inStart > inEnd) return NULL;
+
+  TreeNode<int> * root = new TreeNode<int> (preorder[preStart]);
+  int elem = mp[root -> data];
+  int nElem = elem - inStart;
+
+  root -> left = solve(preorder, preStart + 1, preStart + nElem, inorder,
+  inStart, elem - 1, mp);
+  root -> right = solve(preorder, preStart + nElem + 1, preEnd, inorder, 
+  elem + 1, inEnd, mp);
+
+  return root;
+    }
+// TreeNode<int>* solve(vector<int> &preorder,int prst,int prend, vector<int> &inorder,int inst,int inend,map<int,int>&mp){
+//     if(prst>prend||inst>inend) return NULL;
+//     TreeNode<int> *root=new TreeNode<int>(preorder[prst]);
+//     int inRoot=mp[root->data];
+//     int numslft=inRoot-inst;
+    
+//     root->left=solve(preorder,prst+1,prst+numslft,inorder,inst,inRoot-1,mp);
+//     root->right=solve(preorder,prst+numslft+1,prend,inorder,inRoot+2,inend,mp);
+//     return root;
+// }
+TreeNode<int> *buildBinaryTree(vector<int> &inorder, vector<int> &preorder)
+{int preStart = 0, preEnd = preorder.size() - 1;
+  int inStart = 0, inEnd = inorder.size() - 1;
+
+  map < int, int > mp;
+  for (int i = inStart; i <= inEnd; i++) {
+    mp[inorder[i]] = i;
+  }
+
+  return solve(preorder, preStart, preEnd, inorder, inStart, inEnd, mp);
+}
