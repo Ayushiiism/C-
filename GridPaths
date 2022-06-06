@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+int dp[16][16];
+int solve(int i,int j,int m,int n,int cnt){
+    if(i==m-1&&j==n-1){
+        cnt++;
+        return 1;
+    }
+    if(i==m||j==n){
+        return 0;
+    }if(dp[i][j]!=-1) return dp[i][j];
+    return dp[i][j]=solve(i+1,j,m,n,cnt)+solve(i,j+1,m,n,cnt);
+}
+int uniquePaths(int m, int n) {
+    memset(dp,-1,sizeof(dp));
+	return solve(0,0,m,n,0);
+}
