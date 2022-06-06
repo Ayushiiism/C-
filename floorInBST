@@ -1,0 +1,17 @@
+
+#include<bits/stdc++.h>
+int floorInBST(TreeNode<int> * root, int x)
+{
+    int floor=-1;
+    while(root){
+        if(root->val<x){
+            floor=root->val;
+            root=root->right;
+        }else if(x<root->val){
+            root=root->left;
+        }else{
+            floor=root->val;
+            return floor;
+        }
+    }return floor;
+}
