@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+TreeNode<int>* solve(vector<int> &pre,int& i,int bound){
+    if(i==pre.size()||pre[i]>bound)
+        return NULL;
+//     if(i==0)
+    TreeNode<int>* root=new TreeNode<int>(pre[i++]);
+    root->left=solve(pre,i,root->data);
+    root->right=solve(pre,i,bound);
+    return root; 
+}
+TreeNode<int>* preOrderTree(vector<int> &preOrder){
+    int i=0;
+    return solve(preOrder,i,INT_MAX);
+}
