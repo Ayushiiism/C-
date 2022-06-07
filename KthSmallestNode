@@ -1,0 +1,13 @@
+
+TreeNode<int>* solve(TreeNode<int> *root, int &k){
+    if(!root) return NULL;
+    TreeNode<int>* lft=solve(root->left,k);
+    if(lft!=NULL) return lft;
+    k--;
+    if(k==0) return root;
+    else return solve(root->right,k);
+}
+int kthSmallest(TreeNode<int> *root, int k)
+{
+	return solve(root,k)->data;
+}
