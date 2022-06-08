@@ -1,0 +1,38 @@
+
+#include<bits/stdc++.h>
+class BSTiterator
+{
+    stack<TreeNode<int>*>mySt;
+    public:
+    BSTiterator(TreeNode<int> *root)
+    {
+     pushAll(root);   
+    }
+
+    int next()
+    {
+        TreeNode<int>* tmp=mySt.top();
+        mySt.pop();
+        pushAll(tmp->right);
+        return tmp->data;
+    }
+
+    bool hasNext()
+    {
+        return !mySt.empty();
+    }
+    private:
+    void pushAll(TreeNode<int>* node){
+        for(;node!=NULL;mySt.push(node),node=node->left);
+    }
+};
+
+
+/*
+    Your BSTIterator object will be instantiated and called as such:
+    BSTIterator iterator(root);
+    while(iterator.hasNext())
+    {
+       print(iterator.next());
+    }
+*/
