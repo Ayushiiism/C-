@@ -1,0 +1,16 @@
+void solve(int n,vector<int>&num,vector<int>&ans,int val){
+    if(n<0){
+        ans.push_back(val);  
+        return;
+    }
+    solve(n-1,num,ans,val+num[n]);
+    solve(n-1,num,ans,val);
+}
+vector<int> subsetSum(vector<int> &num)
+{
+    vector<int>ans;
+    int n=num.size();
+    solve(n-1,num,ans,0);
+    sort(ans.begin(),ans.end());
+    return ans;
+}
