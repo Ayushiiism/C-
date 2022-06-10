@@ -1,0 +1,17 @@
+#include <bits/stdc++.h> 
+int findMajorityElement(int nums[], int n) {
+	 int cnt=1;
+    int major=nums[0];
+    for(int i=1;i<n;++i){
+        if(cnt==0) major=nums[i];
+        if(major==nums[i]) cnt++;
+        else cnt--;
+    }
+      cnt=0;
+    for(int i=0;i<n;++i){
+        if(nums[i]==major)
+            cnt++;
+    }
+    if(cnt>n/2) return major;
+        else return -1;
+}
