@@ -1,0 +1,9 @@
+
+#include<bits/stdc++.h>
+void deleteNode(LinkedListNode<int> * node) {
+    LinkedListNode<int> *tmp;
+    tmp=node->next;
+    swap(node->data,node->next->data);
+    node->next=node->next->next;
+    delete tmp;
+}
