@@ -1,0 +1,9 @@
+
+bool solve(BinaryTreeNode<int>* p, BinaryTreeNode<int>* q){
+        if(p==NULL || q==NULL)
+            return (p==q);
+       return (p->data==q->data)&&solve(p->left,q->left)&&solve(p->right,q->right);
+}
+bool identicalTrees(BinaryTreeNode<int>* root1, BinaryTreeNode<int>* root2) {
+  return solve(root1,root2);
+}
