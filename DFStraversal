@@ -1,0 +1,33 @@
+void dfs(int n,vector<int >&ans,vector<int> graph[],vector<int>&vis){
+    vis[n]=1;
+    ans.push_back(n);
+    for(auto i:graph[n]){
+        if(!vis[i]){
+            dfs(i,ans,graph,vis);
+        }
+    }
+}
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+{
+    vector<int>graph[V];
+    vector<int>vis(V,0);
+    int n=edges.size();
+    for(int i=0;i<n;++i){
+        int a=edges[i][0];
+        int b=edges[i][1];
+        graph[a].push_back(b);
+        graph[b].push_back(a);
+    }vector<vector<int>> ans;
+    for(int i=0;i<V;++i){
+        vector<int>res;
+        if(!vis[i]){
+            dfs(i,res,graph,vis);
+        }
+        if(res.size()!=0){
+        sort(res.begin(),res.end());
+        ans.push_back(res);
+        }
+    }
+//     sort(ans.begin(),ans.end());
+    return ans;
+}
