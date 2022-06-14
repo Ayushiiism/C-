@@ -1,0 +1,22 @@
+#include<bits/stdc++.h>
+int dp[1001][1001];
+int solve(vector<int>&price,int n,int sum){
+    if(sum==0){
+        return 0;
+    }if(sum<0||n<0) return -1e9;
+    if(dp[n][sum]!=-1) return dp[n][sum];
+    int x=INT_MIN;
+    if(n<=sum){
+        x=price[n]+solve(price,n,sum-n-1);
+    }
+    int y=solve(price,n-1,sum);
+    return dp[n][sum]=max(x,y);
+}
+int cutRod(vector<int> &price, int n)
+{
+    memset(dp,-1,sizeof(dp));
+    vector<int>len(n);
+    for(auto i=0;i<n;++i) len[i]=i+1;
+    int k=n;
+	return solve(price,n-1,k);
+}
