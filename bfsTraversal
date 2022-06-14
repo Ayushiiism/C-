@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+void bfs(int i,vector<int>&res,vector<int>graph[],vector<int> &vis){
+    vis[i]=1;
+    queue<int> q;
+    q.push(i);
+    while(!q.empty()){
+        int x=q.front();
+        res.push_back(x);
+        q.pop();
+        for(auto i:graph[x]){
+            if(!vis[i]){
+                vis[i]=1;
+                q.push(i);
+            }
+        }
+    }
+}
+vector<int> BFS(int V, vector<pair<int, int>> edges)
+{
+    vector<int>graph[V];
+    vector<int>vis(V,0);
+    int n=edges.size();
+    for(int i=0;i<n;++i){
+        int a=edges[i].first;
+        int b=edges[i].second;
+        graph[b].push_back(a);
+        graph[a].push_back(b);
+    }vector<int>res;
+    for(int i = 0; i <V; i++)
+           sort(graph[i].begin(),graph[i].end());
+    for(int i=0;i<V;++i){
+        if(!vis[i]){
+            bfs(i,res,graph,vis);
+        }
+    }
+        
+    return res;
+}
