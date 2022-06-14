@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+long long  dp[101][10001];
+long long solve(int *arr,int n,int value){
+    if(value==0) return 1;
+    if(value<0||n<0) return 0;
+    if(dp[n][value]!=-1) return dp[n][value];
+    long long x=0;
+    if(arr[n]<=value){
+        x=solve(arr,n,value-arr[n]);
+    }long long y=solve(arr,n-1,value);
+    return dp[n][value]=x+y;
+}
+long countWaysToMakeChange(int *denominations, int n, int value)
+{
+    memset(dp,-1,sizeof(dp));
+    return solve(denominations,n-1,value);
+}
