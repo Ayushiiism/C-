@@ -1,43 +1,37 @@
 #include<bits/stdc++.h>
-bool helper(int root,vector<int>adj[],vector<int>&col){
+bool bfs(int src,vector<int> graph[],vector<int>col){
     queue<int>q;
-    q.push(root);
-    col[root]=1;
-    
+    q.push(src);
+    col[src]=1;
     while(!q.empty()){
         int node=q.front();
         q.pop();
-        for(auto it:adj[node]){
+        for(auto it:graph[node]){
             if(col[it]==-1){
                 col[it]=1-col[node];
                 q.push(it);
-            }
-            else if(col[it]==col[node]){
-                return false;
-            }
+            }else if(col[it]==col[node])
+                return 0;
         }
-    }
-    return true;
+    }return 1;
 }
-
 bool isGraphBirpatite(vector<vector<int>> &edges) {
     int n=edges[0].size();
-    vector<int>adj[n];
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
+    vector<int>graph[n];    
+    for(int i=0;i<n;++i){
+        for(int j=0;j<n;++j){
             if(edges[i][j]==1){
-                adj[i].push_back(j);
-                adj[j].push_back(i);
+                graph[i].push_back(j);
+                graph[j].push_back(i);
             }
         }
     }
-    vector<int>col(n,-1);
-    for(int i=0;i<n;i++){
+     vector<int>col(n,-1);
+    for(auto i=0;i<n;++i){
         if(col[i]==-1){
-            if(helper(i,adj,col)==false){
-                return false;
+            if(bfs(i,graph,col)==0) {
+                return 0;
             }
         }
-    }
-    return true;
+    }return 1;
 }
