@@ -1,0 +1,29 @@
+
+#include<bits/stdc++.h>
+// vector<int> getTopView(TreeNode<int> *root) {
+vector<int> bottomView(BinaryTreeNode<int> * root){
+    vector<int>ans;
+    if(!root) return ans;
+    map<int,int>mp;
+    queue<pair<int,BinaryTreeNode<int>*>>q;
+    q.push({0,root});
+    while(!q.empty()){
+        auto x=q.front();
+        int t=x.first;
+        BinaryTreeNode<int>* p=x.second;
+        q.pop();
+//         if(mp.find(t)==mp.end()){
+            mp[t]=p->data;
+//         }
+        if(p->left) q.push({t-1,p->left});
+        if(p->right) q.push({t+1,p->right});
+    }
+    for(auto i:mp){
+        ans.push_back(i.second);
+    }return ans;
+}
+
+// vector<int> bottomView(BinaryTreeNode<int> * root){
+
+    
+
