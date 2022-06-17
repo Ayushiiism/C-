@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+int dp[1001][1001];
+int solve(int n,int m,string s,string t){
+    if(n<0||m<0){
+       return 0; 
+    }if(dp[n][m]!=-1) return dp[n][m];
+    int x=INT_MIN;
+    if(s[n]==t[m]) x=1+solve(n-1,m-1,s,t);
+    int y=max(solve(n-1,m,s,t),solve(n,m-1,s,t));
+    return dp[n][m]=max(x,y);
+}
+int lcs(string s, string t)
+{
+    memset(dp,-1,sizeof(dp));
+    int n=s.size();
+    int m=t.size();
+	return solve(n-1,m-1,s,t);
+}
