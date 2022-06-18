@@ -1,0 +1,29 @@
+void find_sucessor(BinaryTreeNode<int>* root, int key,int &suc){
+    if(!root) return;
+    if(root->data<=key){
+        find_sucessor(root->right,key,suc);
+    }
+    else if(root->data>key){
+        suc=root->data;
+        find_sucessor(root->left,key,suc);
+    }
+}
+void find_predecessor(BinaryTreeNode<int>* root, int key,int &pred){
+     if(!root) return;
+    if(root->data<key){
+        pred=root->data;
+        find_predecessor(root->right,key,pred);
+    }
+    else if(root->data>=key){
+    
+       find_predecessor(root->left,key,pred);
+    }
+}
+pair<int,int> predecessorSuccessor(BinaryTreeNode<int>* root, int key)
+{
+    // Write your code here.
+    int suc=-1,pred=-1;
+    find_sucessor(root,key,suc);
+    find_predecessor(root,key,pred);
+    return {pred,suc};
+}
