@@ -1,0 +1,30 @@
+bool validateLeft(BinaryTreeNode<int>* , int);
+bool validateRight(BinaryTreeNode<int>*, int);
+bool validateRight(BinaryTreeNode<int>* root, int data) {
+    if(root == NULL) {
+        return true;
+    }
+    
+    if(root -> data < data) {
+        return false;
+    }
+    return (validateLeft(root -> left, root -> data) && validateRight(root -> right, root -> data));
+}
+
+bool validateLeft(BinaryTreeNode<int>* root, int data) {
+    if(root == NULL) {
+        return true;
+    }
+    
+    if(root -> data > data) {
+        return false;
+    }
+    return (validateLeft(root -> left, root -> data) && validateRight(root -> right, root -> data));
+}
+
+bool validateBST(BinaryTreeNode<int> *root) {
+    if(root == NULL) {
+        return true;
+    }
+    return (validateLeft(root -> left, root -> data) && validateRight(root -> right, root -> data));
+}
