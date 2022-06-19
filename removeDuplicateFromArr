@@ -5,3 +5,20 @@ int removeDuplicates(vector<int> &arr, int n) {
         st.insert(arr[i]);
     }return st.size();
 }
+
+
+
+way 2
+
+
+
+#include<bits/stdc++.h>
+int removeDuplicates(vector<int> &arr, int n) {
+	int i=0,j=1;
+    while(j<n){
+        if(arr[j]!=arr[j-1]){
+            i++;
+            
+        }j++;
+    }return i+1;
+}
