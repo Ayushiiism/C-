@@ -1,0 +1,21 @@
+int findMinimumCoins(int amt) 
+{
+    int val[9]={1, 2, 5, 10, 20, 50, 100, 500, 1000};
+    int n=9;
+    int ans=0;
+    for(auto i=n-1;i>=0;i--){
+        if(amt==0) break;
+        if(val[i]>amt){
+            continue;
+        }else{
+            if(val[i]==amt){
+                ans+=1;
+                break;
+            }else if(val[i]<amt){
+                amt-=val[i];
+                i++;
+                ans++;
+            }
+        }
+    }return ans;
+}
