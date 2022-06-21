@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+int minTimeToRot(vector<vector<int>>& grid, int m, int n)
+{
+    if(grid.empty()) return 0;
+    int cnt=0,tot=0,days=0;
+    queue<pair<int,int>>q;
+    for(int i=0;i<m;++i){
+        for(int j=0;j<n;++j){
+            if(grid[i][j]!=0) tot++;
+            if(grid[i][j]==2){
+                q.push({i,j});
+            }
+        }
+    }  
+    int dx[4]={0,0,1,-1};
+    int dy[4]={1,-1,0,0};
+    while(!q.empty()){
+        int k=q.size();
+        cnt+=k;
+        while(k--){
+            int x=q.front().first;
+            int y=q.front().second;
+            q.pop();
+            for(int i=0;i<4;++i){
+                int ax=x+dx[i];
+                int ay=y+dy[i];
+                if(ax<0||ay<0||ax>=m||ay>=n||grid[ax][ay]!=1){
+                    continue;
+                }
+                else{
+                grid[ax][ay]=2;
+                q.push({ax,ay});
+                }
+            }
+        }if(!q.empty()) days++;
+    }return cnt==tot?days:-1;
+}
