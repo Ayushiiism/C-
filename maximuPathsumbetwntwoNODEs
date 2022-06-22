@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+ int solve(TreeNode<int>* root,int &res){
+        if(!root) return 0;
+        int l=solve(root->left,res);
+        int r=solve(root->right,res);
+        int temp=max(max(l,r)+root->val,root->val);
+        res=max(res,l+r+root->val);
+        return temp;
+    }
+void leaves(TreeNode<int> *root, int &count)
+{
+   if(root==NULL)
+       return;
+  leaves(root->left, count);
+   leaves(root->right, count);
+   if(root->left==NULL && root->right==NULL)
+       count++;
+}
+long long int findMaxSumPath(TreeNode<int> *root)
+{
+        int res=INT_MIN;
+        solve(root,res);
+        int cnt=0;
+        leaves(root,cnt);
+        if(cnt==1) return -1;
+        return res==INT_MIN?-1:res;
+}
