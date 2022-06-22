@@ -3,8 +3,9 @@
         if(!root) return 0;
         int l=solve(root->left,res);
         int r=solve(root->right,res);
-        int temp=max(max(l,r)+root->val,root->val);
-        res=max(res,l+r+root->val);
+        int temp=(max(l,r)+root->val);
+        int ans=max(temp,l+r+root->val);
+        res=max(res,ans);
         return temp;
     }
 void leaves(TreeNode<int> *root, int &count)
