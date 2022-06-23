@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+int lengthOfLongestConsecutiveSequence(vector<int> &nums, int n) {
+       unordered_set<int>hash;
+        for(auto i=0;i<n;++i){
+            hash.insert(nums[i]);
+        }int longest=0;
+        for(auto i:nums){
+            if(!hash.count(i-1)){
+                int curr_num=i;
+                int cnt=1;
+                while(hash.count(curr_num+1)){
+                    curr_num++;
+                    cnt++;
+                }
+            longest=max(cnt,longest);
+            }
+        }return longest;
+}
