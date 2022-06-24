@@ -1,0 +1,105 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+            int data;
+            Node *next;
+            Node(int data)
+            {
+                this->data = data;
+                this->next = NULL;
+            }
+        };
+
+*****************************************************************/
+Node* rev(Node *head){
+        if(head->next==NULL) return head;
+        Node *rev_head=rev(head->next);
+        head->next=head->next->next;
+        head=NULL;
+        return head;
+ }
+Node *addTwoNumbers(Node *l1, Node *l2)
+{
+    if(l1==NULL) return l2;
+       else if(l2==NULL) return l1;
+       int rem=0;
+       Node *t1=l1,*t2=l2;
+       Node *ans=new Node(-1);
+       Node *tail=ans;
+       while(t1!=NULL && t2!=NULL){
+           Node *temp=new Node(0);
+           if((t1->data)+rem+(t2->data)<=9){
+            temp->data=t1->data+t2->data+rem;
+            tail->next=temp;
+            tail=tail->next;
+            rem=0;
+           }else if(t1->data+t2->data+rem>9){
+               int x=(t1->data)+(t2->data)+rem;
+    
+               temp->data=x%10;
+               tail->next=temp;
+               tail=tail->next;
+               rem=1;
+           }
+           t1=t1->next;
+           t2=t2->next;
+       }
+        if(rem==0){
+        while(t1!=NULL){
+           Node *temp=new Node(0);
+           temp->data=t1->data;
+           tail->next=temp;
+           tail=tail->next;
+           t1=t1->next;
+       }while(t2!=NULL){
+           Node *temp=new Node(0);
+           temp->data=t2->data;
+           tail->next=temp;
+           tail=tail->next;
+           t2=t2->next;
+       }       
+    }else{
+           while(t1!=NULL){
+           Node *temp=new Node(0);
+           if(t1->data+rem<=9){
+           temp->data=t1->data+rem;
+           tail->next=temp;
+           tail=tail->next;
+           rem=0;
+           }else{
+           int x=t1->data+rem;
+           temp->data=x%10;
+           rem=1;
+           tail->next=temp;
+           tail=tail->next;   
+           }t1=t1->next;
+           }
+           
+           while(t2!=NULL){
+           Node *temp=new Node(0);
+           if(t2->data+rem<=9){
+           temp->data=t2->data+rem;
+           tail->next=temp;
+           tail=tail->next;
+           rem=0;
+           }else{
+           int x=t2->data+rem;
+           temp->data=x%10;
+           rem=1;
+           tail->next=temp;
+           tail=tail->next;   
+           }t2=t2->next;
+           }
+       }if(rem){
+           Node *temp=new Node(1);
+           tail->next=temp;
+       }
+        return ans->next;       
+           
+}
+
