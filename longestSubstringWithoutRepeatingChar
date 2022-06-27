@@ -1,0 +1,17 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string s)
+{   
+    vector<int>v(128);
+    int n=s.size();
+    int i=0,j=0;
+    int res=0;
+    while(j<n){
+        v[s[j]]++;
+        while(v[s[j]]>1){
+            v[s[i]]--;
+            i++;
+        }
+        res=max(res,j-i+1);
+        j++;
+    }return res;
+}
