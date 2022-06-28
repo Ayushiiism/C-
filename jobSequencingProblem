@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+bool comp(vector<int> x,vector<int> y){
+    if(x[1]>y[1]) return 1;
+    else  return 0;
+}
+int jobScheduling(vector<vector<int>> &jobs)
+{
+    sort(jobs.begin(),jobs.end(),comp);
+    int n=jobs.size();
+    int maxi=jobs[0][0];
+    for(int i=0;i<n;++i){
+        maxi=max(maxi,jobs[i][0]);
+    }
+    int slot[maxi+1];
+    for(int i=0;i<=maxi;i++)
+    {
+        slot[i]=-1;
+    }
+    int cntjobs=0,jobProfit=0;
+    for(int i=0;i<n;++i){
+        for(int j=jobs[i][0];j>0;j--){
+            if(slot[j]==-1){
+                slot[j]=i;
+                cntjobs++;
+                jobProfit+=jobs[i][1];
+                break;
+            }
+        }
+    }return jobProfit;
+}
