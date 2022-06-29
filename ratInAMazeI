@@ -1,0 +1,22 @@
+void solve(vector<vector<int> > &maze,int n,int i,int j,vector<int>&res,vector<vector<int>>&ans){
+    if(i==n-1&&j==n-1){
+        res[i*n+j]=1;
+        ans.push_back(res);
+        return;
+    }
+     if(i>=n||i<0||j>=n||j<0||maze[i][j]==0||res[i*n+j]==1)
+        return;
+    res[i*n+j]=1;
+    solve(maze,n,i+1,j,res,ans);
+    solve(maze,n,i-1,j,res,ans);
+    solve(maze,n,i,j+1,res,ans);
+    solve(maze,n,i,j-1,res,ans);
+    res[i*n+j]=0;
+    return;
+}
+vector<vector<int> > ratInAMaze(vector<vector<int> > &maze, int n){
+    vector<vector<int>>ans;
+    vector<int>res(n*n,0);
+    solve(maze,n,0,0,res,ans);
+    return ans;
+}
