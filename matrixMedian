@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+int countSmallerThanMid(vector<int> &row,int mid){
+    int low=0,high=row.size()-1;
+    while(low<=high){
+        int md=(low+high)>>1;
+        if(row[md]<=mid)
+        low=md+1;
+        else
+        high=md-1;
+    }return low;
+}
+int getMedian(vector<vector<int>> &A)
+{ int row=A.size();
+    int col=A[0].size();
+    int s=INT_MIN,e=INT_MAX,length=(row*col)>>2;
+    while(s<=e){
+       int mid=(e+s)>>1;
+       int count=0;
+       for(auto i=0;i<row;i++){
+           count+=countSmallerThanMid(A[i],mid);
+       }
+       
+        if(count<=(row*col)/2) s=mid+1;
+        else e=mid-1;
+
+    }
+    return s;
+}
