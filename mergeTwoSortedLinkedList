@@ -1,0 +1,40 @@
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the linked list node structure.
+    
+    template <typename T>
+    class Node {
+        public:
+        T data;
+        Node* next;
+
+        Node(T data) {
+            next = NULL;
+            this->data = data;
+        }
+
+        ~Node() {
+            if (next != NULL) {
+                delete next;
+            }
+        }
+    };
+
+************************************************************/
+Node<int>* merge(Node<int>* a, Node<int>* b){
+    Node<int>* res=NULL;
+    if(a==NULL) return b;
+    if(b==NULL) return a;
+    if(a->data<b->data){
+        res=a;
+        a->next=merge(a->next,b);
+    }else{
+        res=b;
+        b->next=merge(a,b->next);
+    }return res;
+}
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second)
+{
+    return merge(first,second);
+}
