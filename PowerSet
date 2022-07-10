@@ -1,0 +1,17 @@
+void solve(int ind,int n,vector<int>&v,vector<int>res,vector<vector<int>>&ans){
+    if(ind==n){
+        ans.push_back(res);
+        return;
+    }
+    solve(ind+1,n,v,res,ans);
+    res.push_back(v[ind]);
+    solve(ind+1,n,v,res,ans);
+}
+vector<vector<int>> pwset(vector<int>v)
+{
+   vector<vector<int>>ans;
+    vector<int>res;
+    int n=v.size();
+    solve(0,n,v,res,ans);
+    return ans;
+}
