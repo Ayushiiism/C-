@@ -1,0 +1,22 @@
+bool isSafe(int node,vector<vector<int>> &mat,vector<int>&col,int n,int i){
+    for(int it=0;it<n;++it){
+        if(node!=it&&mat[node][it]==1&&col[it]==i)
+            return false;
+    }return true;
+}
+bool solve(int node,vector<vector<int>> &mat,vector<int>&col,int m,int n){
+    if(node==n) return 1;
+    for(int i=1;i<=m;++i){
+        if(isSafe(node,mat,col,n,i)){
+            col[node]=i;
+            if(solve(node+1,mat,col,m,n))return 1;
+            col[node]=0;
+        }
+    }return false;
+}
+string graphColoring(vector<vector<int>> &mat, int m) {
+    int n=mat.size();
+    vector<int>col(n,0);
+    if(solve(0,mat,col,m,n)) return "YES";
+    else return "NO";
+}
