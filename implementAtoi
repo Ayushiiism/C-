@@ -1,0 +1,21 @@
+int atoi(string str) {
+   int number = 0;
+    bool isNegative = 0;
+    for (int i = 0; i < str.size(); i++) {
+
+        
+        if (str[i] >= '0'
+            and str[i] <= '9') {
+            int digit =  str[i] - 48;
+            number = number * 10 + digit;
+        }
+    }
+if (str[0] == '-') {
+        isNegative = 1;
+    }
+    if (isNegative) {
+        number =number*(-1) ;
+    }
+
+    return number;
+    }
